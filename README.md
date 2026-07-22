@@ -14,7 +14,7 @@
 
 NideShop 是一套完整的开源微信商城解决方案。本项目在原版 [NideShop](https://github.com/tumobi/nideshop) 基础上进行了二次开发，**将原有的微信授权登录改造为账号密码注册 / 登录系统**，并接入了微信公众号（测试号）实现 OAuth 网页授权登录、自动回复与菜单跳转，同时新增了 H5 移动端商城与后台管理界面，使用 Docker Compose 实现一键部署。
 
-> 本项目为课程实践作品，后端、小程序、H5、后台、部署脚本均已完整实现并可运行。
+项目覆盖后端 API、微信小程序、H5 商城、后台管理、容器化部署全链路，均为独立开发实现。
 
 ### ✨ 核心特性
 
@@ -278,14 +278,11 @@ curl http://localhost:8360/admin/index/index
 
 ---
 
-## 👥 团队
+## 👤 作者
 
-项目开发实现第二组
+**zengmo20224** — 独立开发（全栈：后端 API · 微信小程序 · H5 · 后台 · 部署）
 
-- 曾志洪
-- 郑蔚然
-- 刘意沁
-- 陈灏言
+- GitHub：[@zengmo20224](https://github.com/zengmo20224)
 
 ---
 
@@ -299,6 +296,6 @@ curl http://localhost:8360/admin/index/index
 
 <div align="center">
 
-<sub>本项目为课程实践作品，仅供学习交流使用。</sub>
+<sub>个人独立开发作品 · 基于 MIT 开源项目 NideShop 二次开发。</sub>
 
 </div>
