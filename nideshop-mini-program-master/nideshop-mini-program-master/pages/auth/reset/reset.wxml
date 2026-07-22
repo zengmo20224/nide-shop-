@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="form-box">
+    <view class="form-item">
+      <input class="mobile" value="{{mobile}}" type="number" bindinput="bindMobileInput" placeholder="注册手机号" maxlength="11" auto-focus/>
+      <image wx:if="{{mobile.length > 0}}" id="clear-mobile" class="clear" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    </view>
+
+    <view class="form-item-code">
+      <view class="form-item code-item">
+        <input class="code" value="{{code}}" type="number" bindinput="bindCodeInput" placeholder="验证码 666666" maxlength="6"/>
+        <image class="clear" id="clear-code" wx:if="{{code.length > 0}}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+      </view>
+      <view class="code-text">666666</view>
+    </view>
+
+    <view class="form-item">
+      <input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="新密码，不少于 6 位" maxlength="32"/>
+      <image class="clear" id="clear-password" wx:if="{{password.length > 0}}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    </view>
+
+    <view class="form-item">
+      <input class="password" value="{{confirmPassword}}" password bindinput="bindConfirmPasswordInput" placeholder="确认新密码" maxlength="32"/>
+      <image class="clear" id="clear-confirm-password" wx:if="{{confirmPassword.length > 0}}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    </view>
+
+    <button type="default" class="login-btn" loading="{{isSubmitting}}" disabled="{{isSubmitting}}" bindtap="resetPassword">重置密码</button>
+  </view>
+</view>

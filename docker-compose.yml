@@ -1,0 +1,69 @@
+name: nideshop
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:5.7
+    container_name: nideshop-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: nideshop123
+      MYSQL_DATABASE: nideshop
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./nideshop-master/nideshop-master/nideshop.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pnideshop123"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Node.js API Server
+  api:
+    build:
+      context: ./nideshop-master/nideshop-master
+      dockerfile: Dockerfile
+    container_name: nideshop-api
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: nideshop
+      DB_USER: root
+      DB_PASS: nideshop123
+      DOCKER: "1"
+      WECHAT_OFFICIAL_APPID: ${WECHAT_OFFICIAL_APPID:-}
+      WECHAT_OFFICIAL_SECRET: ${WECHAT_OFFICIAL_SECRET:-}
+      WECHAT_OFFICIAL_TOKEN: ${WECHAT_OFFICIAL_TOKEN:-nideshop}
+      WECHAT_OAUTH_REDIRECT_URL: ${WECHAT_OAUTH_REDIRECT_URL:-}
+    ports:
+      - "8360:8360"
+    volumes:
+      - ./nideshop-master/nideshop-master/www/static/upload:/app/www/static/upload
+      - ./nideshop-master/nideshop-master/www/static/user/avatar:/app/www/static/user/avatar
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # Nginx - serve static files + reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nideshop-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/nideshop.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./mobile-html:/usr/share/nginx/mobile-html:ro
+      - ./admin-html:/usr/share/nginx/admin-html:ro
+      - ./nideshop-master/nideshop-master/www/static:/usr/share/nginx/backend-static:ro
+    depends_on:
+      - api
+
+volumes:
+  mysql_data:

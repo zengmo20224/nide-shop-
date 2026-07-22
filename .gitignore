@@ -1,0 +1,53 @@
+# =========================
+# 敏感配置（含微信密钥，切勿提交）
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Node.js 后端
+# =========================
+**/node_modules/
+# ThinkJS 编译输出（src 才是源码）
+nideshop-master/nideshop-master/app/
+# 运行时缓存/日志
+nideshop-master/nideshop-master/runtime/
+nideshop-master/nideshop-master/logs/
+nideshop-master/nideshop-master/output/
+# 异常产生的空目录
+nideshop-master/nideshop-master/undefined/
+# 本地开发专用配置
+nideshop-master/nideshop-master/src/common/config/config.development.js
+nideshop-master/nideshop-master/src/common/config/adapter.development.js
+
+# =========================
+# 日志文件（根目录 cpolar / 测试日志）
+# =========================
+*.log
+*.out
+*.err
+*.pid
+*.seed
+
+# =========================
+# 小程序
+# =========================
+nideshop-mini-program-master/**/project.config.json
+
+# =========================
+# IDE / 编辑器
+# =========================
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# =========================
+# 构建产物 / 临时
+# =========================
+*.tar.gz
+coverage/
+.grunt/
+.lock-wscript

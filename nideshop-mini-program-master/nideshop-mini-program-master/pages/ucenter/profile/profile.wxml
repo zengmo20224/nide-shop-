@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="profile-card">
+    <image class="avatar" src="{{userInfo.avatar || defaultAvatar}}"></image>
+    <button class="avatar-btn" bindtap="chooseAvatar">更换头像</button>
+  </view>
+
+  <view class="form-panel">
+    <view class="form-title">账号资料</view>
+    <view class="form-row">
+      <view class="label">用户名</view>
+      <view class="readonly">{{userInfo.username}}</view>
+    </view>
+    <view class="form-row">
+      <view class="label">手机号</view>
+      <view class="readonly">{{userInfo.mobile}}</view>
+    </view>
+  </view>
+
+  <view class="form-panel">
+    <view class="form-title">修改密码</view>
+    <view class="form-row">
+      <view class="label">新密码</view>
+      <input class="input" password value="{{password}}" bindinput="bindPasswordInput" placeholder="至少 6 位" />
+    </view>
+    <view class="form-row">
+      <view class="label">确认密码</view>
+      <input class="input" password value="{{confirmPassword}}" bindinput="bindConfirmPasswordInput" placeholder="再次输入新密码" />
+    </view>
+    <view class="submit-btn muted" bindtap="changePassword">修改密码</view>
+  </view>
+</view>

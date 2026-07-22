@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="balance-card">
+    <view class="label">当前余额</view>
+    <view class="amount">¥{{balance}}</view>
+  </view>
+
+  <view class="form-panel">
+    <view class="form-title">充值金额</view>
+    <input class="amount-input" type="digit" value="{{amount}}" bindinput="bindAmountInput" placeholder="请输入金额" />
+    <view class="quick-list">
+      <view wx:for="{{quickAmounts}}" wx:key="*this" class="quick-item" data-amount="{{item}}" bindtap="selectQuickAmount">¥{{item}}</view>
+    </view>
+  </view>
+
+  <view class="submit-btn" bindtap="submitRecharge">确认充值</view>
+</view>
